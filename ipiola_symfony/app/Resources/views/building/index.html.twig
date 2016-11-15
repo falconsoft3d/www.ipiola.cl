@@ -1,0 +1,130 @@
+
+{% extends 'template-datatables.html.twig' %}
+
+{% set content_title = 'page.title.buildings.list'|trans %}
+{% set content_description = 'page.description.buildings.list'|trans %}
+
+{% block page_title %}{{ content_title }}{% endblock %}
+
+{% block page_base_content %}
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="caption font-dark">
+                        {# <i class="icon-settings font-dark"></i> #}
+                        <span class="caption-subject bold uppercase"> {{ 'table.title.buildings'|trans }} </span>
+                    </div>
+                    {# <div class="actions">
+                        <div class="btn-group btn-group-devided" data-toggle="buttons">
+                            <label class="btn btn-transparent dark btn-outline btn-circle btn-sm active">
+                                <input type="radio" name="options" class="toggle" id="option1">Actions</label>
+                            <label class="btn btn-transparent dark btn-outline btn-circle btn-sm">
+                                <input type="radio" name="options" class="toggle" id="option2">Settings</label>
+                        </div>
+                    </div> #}
+                </div>
+                <div class="portlet-body">
+                    <div class="table-toolbar">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="btn-group">
+                                    <a href="{{ path('building_add') }}" class="btn sbold green">
+                                        <i class="fa fa-plus"></i>
+                                        {{ 'table.action.add_new'|trans }}
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                {# <div class="btn-group pull-right">
+                                    <button class="btn green  btn-outline dropdown-toggle" data-toggle="dropdown">Tools
+                                        <i class="fa fa-angle-down"></i>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li>
+                                            <a href="javascript:;">
+                                                <i class="fa fa-print"></i> Print </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <i class="fa fa-file-pdf-o"></i> Save as PDF </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:;">
+                                                <i class="fa fa-file-excel-o"></i> Export to Excel </a>
+                                        </li>
+                                    </ul>
+                                </div> #}
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                        <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" />
+                                        <span></span>
+                                    </label>
+                                </th>
+                                <th> {{ 'field.building.name'|trans }} </th>
+                                <th> {{ 'field.building.architect'|trans }} </th>
+                                <th> {{ 'field.building.budgets'|trans }} </th>
+                                <th> {{ 'field.building.date'|trans }} </th>
+                                <th> {{ 'table.col.actions'|trans }} </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for building in buildings %}
+                                <tr class="odd gradeX">
+                                    <td>
+                                        <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                            <input type="checkbox" class="checkboxes" value="{{ building.id }}" />
+                                            <span></span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('building_show', {'id': building.id}) }}">{{ building.name }}</a>
+                                    </td>
+                                    <td> {{ building.architect }} </td>
+                                    <td>
+                                        {% set totalOfBudgets = building.budgets|length %}
+                                        {% if totalOfBudgets > 0 %}
+                                            <a href="javascript:;">{{ totalOfBudgets }}</a>
+                                        {% else %}
+                                            0
+                                        {% endif %}
+                                    </td>
+                                    <td> {{ building.date|date('d-m-Y') }} </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> {{ 'button.actions'|trans }}
+                                                <i class="fa fa-angle-down"></i>
+                                            </button>
+                                            <ul class="dropdown-menu pull-left" role="menu">
+                                                <li>
+                                                    <a href="{{ path('building_edit', {'id': building.id}) }}">
+                                                        <i class="glyphicon glyphicon-edit"></i> {{ 'menu.edit'|trans }}
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="remove-link" href="javascript:;" data-remove-link="{{ path('building_remove', {'id': building.id}) }}">
+                                                        <i class="icon-trash"></i> {{ 'menu.remove'|trans }}
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- END EXAMPLE TABLE PORTLET-->
+        </div>
+    </div>
+{% endblock %}

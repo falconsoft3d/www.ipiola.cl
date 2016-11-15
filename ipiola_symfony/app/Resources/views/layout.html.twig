@@ -1,0 +1,122 @@
+
+{% extends 'base.html.twig' %}
+
+{% block body_class %}page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo{% endblock %}
+
+{% block theme_layout_styles %}
+    <link href="{{ asset('metronic/layouts/layout4/css/layout.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('metronic/layouts/layout4/css/themes/default.min.css') }}" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="{{ asset('metronic/layouts/layout4/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block body %}
+    <!-- BEGIN HEADER -->
+    {% include('includes/header.html.twig') %}
+    <!-- END HEADER -->
+    <!-- BEGIN HEADER & CONTENT DIVIDER -->
+    <div class="clearfix"> </div>
+    <!-- END HEADER & CONTENT DIVIDER -->
+    <!-- BEGIN CONTAINER -->
+    <div class="page-container">
+        <!-- BEGIN SIDEBAR -->
+        <div class="page-sidebar-wrapper">
+            <!-- BEGIN SIDEBAR -->
+            <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+            <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+            <div class="page-sidebar navbar-collapse collapse">
+                <!-- BEGIN SIDEBAR MENU -->
+                {{ include('includes/sidebar-menu.html.twig') }}
+                <!-- END SIDEBAR MENU -->
+            </div>
+            <!-- END SIDEBAR -->
+        </div>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN CONTENT -->
+        <div class="page-content-wrapper">
+            <!-- BEGIN CONTENT BODY -->
+            <div class="page-content">
+                <!-- BEGIN PAGE HEAD-->
+                <div class="page-head">
+                    <!-- BEGIN PAGE TITLE -->
+                    <div class="page-title">
+                        <h1>{{ content_title }}
+                            <small>{{ content_description }}</small>
+                        </h1>
+                    </div>
+                    <!-- END PAGE TITLE -->
+                    {# <!-- BEGIN PAGE TOOLBAR -->
+                    {% include('includes/page-toolbar.html.twig') %}
+                    <!-- END PAGE TOOLBAR --> #}
+                </div>
+                <!-- END PAGE HEAD-->
+                <!-- BEGIN PAGE BREADCRUMB -->
+                {# {% include('includes/breadcrumb.html.twig') %} #}
+                {{ wo_render_breadcrumbs() }}
+                <!-- END PAGE BREADCRUMB -->
+                <!-- BEGIN FLASH MESSAGES -->
+                {% block flash_content %}
+                    {{ include('includes/flash-message.html.twig') }}
+                {% endblock %}
+                <!-- END FLASH MESSAGES -->
+                <!-- BEGIN PAGE BASE CONTENT -->
+                {% block page_base_content %}
+                {% endblock %}
+                <!-- END PAGE BASE CONTENT -->
+            </div>
+            <!-- END CONTENT BODY -->
+        </div>
+        <!-- END CONTENT -->
+        <!-- BEGIN QUICK SIDEBAR -->
+        {# {% include('metronic/admin_4/includes/quick-sidebar.html.twig') %} #}
+        <!-- END QUICK SIDEBAR -->
+    </div>
+    <!-- END CONTAINER -->
+    <!-- BEGIN FOOTER -->
+    {% include('includes/footer.html.twig') %}
+    <!-- END FOOTER -->
+    {# <!-- BEGIN QUICK NAV -->
+    {% include('metronic/common/quick-nav.html.twig') %}
+    <!-- END QUICK NAV --> #}
+
+    <div id="remove-item-modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>{{ 'question.remove_item_confirm'|trans }}</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="" class="btn red remove-button">
+                        <i class="icon-trash"></i>
+                        {{ 'action.remove'|trans }}
+                    </a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'action.cancel'|trans }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block theme_layout_scripts %}
+    <script src="{{ asset('metronic/layouts/layout4/scripts/layout.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('metronic/layouts/layout4/scripts/demo.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('metronic/layouts/global/scripts/quick-sidebar.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('metronic/layouts/global/scripts/quick-nav.min.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+
+        var $modal = $('#remove-item-modal');
+        var $removeButton = $modal.find('a.remove-button');
+
+        $('body').on('click', 'a.remove-link', function(){
+
+            var $this = $(this);
+
+            $removeButton.attr('href', $this.attr('data-remove-link'));
+
+            $modal.modal('show');
+        });
+
+    });
+    </script>
+{% endblock %}

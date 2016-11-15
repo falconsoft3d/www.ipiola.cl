@@ -1,0 +1,112 @@
+
+{% extends 'layout.html.twig' %}
+
+{% set content_title = 'page.title.buildings.show'|trans({'%name%': building.name}) %}
+{% set content_description = 'page.description.buildings.show'|trans %}
+
+{% block page_title %}{{ content_title }}{% endblock %}
+
+{% block page_base_content %}
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN VALIDATION STATES-->
+            <div class="portlet light portlet-fit portlet-form bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        {# <i class="icon-bubble font-green"></i> #}
+                        <span class="caption-subject font-green bold uppercase">{{ content_title }}</span>
+                    </div>
+                    {# <div class="actions">
+                        <div class="btn-group">
+                            <a class="btn green btn-outline btn-circle btn-sm" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> Actions
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li>
+                                    <a href="javascript:;"> Option 1</a>
+                                </li>
+                                <li class="divider"> </li>
+                                <li>
+                                    <a href="javascript:;">Option 2</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">Option 3</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">Option 4</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div> #}
+                </div>
+                <div class="portlet-body">
+                    <!-- BEGIN FORM-->
+                    <form action="#" id="form_sample_2" class="form-horizontal">
+                        <div class="form-body">
+
+                            {% set imageSrc = vich_uploader_asset(building, 'imageFile') | imagine_filter('building_thumb') %}
+                            {% if not imageSrc is empty %}
+                                <div class="form-group  margin-top-20">
+                                    <label class="control-label col-md-3">{{ 'field.building.image_file'|trans }}</label>
+                                    <div class="col-md-9">
+                                        <img src="{{ imageSrc }}" alt="">
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            <div class="form-group  margin-top-20">
+                                <label class="control-label col-md-3">{{ 'field.building.name'|trans }}</label>
+                                <div class="col-md-9">
+                                    {{ building.name }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3">{{ 'field.building.date'|trans }}</label>
+                                <div class="col-md-9">
+                                    {{ building.date|date('d-m-Y') }}
+                                </div>
+                            </div>
+
+                            <div class="form-group  margin-top-20">
+                                <label class="control-label col-md-3">{{ 'field.building.architect'|trans }}</label>
+                                <div class="col-md-9">
+                                    <div class="input-icon right">
+                                        {{ building.architect }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group  margin-top-20">
+                                <label class="control-label col-md-3">{{ 'field.building.comments'|trans }}</label>
+                                <div class="col-md-9">
+                                    <div class="input-icon right">
+                                        {{ building.comments }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {# <div class="form-group ">
+                                <label class="control-label col-md-3">Imagen</label>
+                                <div class="col-md-4">
+
+                                </div>
+                            </div> #}
+
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <a href="{{ path('building_edit', {'id': building.id}) }}" class="btn green">{{ 'action.edit'|trans }}</a>
+                                        <a href="{{ path('building_index') }}" class="btn default">{{ 'action.go_back'|trans }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- END FORM-->
+                </div>
+            </div>
+            <!-- END VALIDATION STATES-->
+        </div>
+    </div>
+{% endblock %}

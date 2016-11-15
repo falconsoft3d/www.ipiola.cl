@@ -1,0 +1,7 @@
+
+_main:
+    resource: routing.yml
+
+render_template:
+    path: /_render
+    defaults: { _controller: AppBundle:Test:render }

@@ -1,0 +1,17 @@
+
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block page_title %}{{ 'page.title.registration.confirmed'|trans }}{% endblock %}
+
+{% block fos_user_content %}
+
+    <h3 class="font-green">{{ 'page.title.registration.confirmed'|trans }}</h3>
+
+    {% trans_default_domain 'FOSUserBundle' %}
+
+    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
+    {% if targetUrl %}
+    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+    {% endif %}
+
+{% endblock fos_user_content %}

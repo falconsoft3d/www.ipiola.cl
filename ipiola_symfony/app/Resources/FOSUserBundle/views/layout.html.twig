@@ -1,0 +1,35 @@
+
+{% extends 'base.html.twig' %}
+
+{% block top_page_level_plugins %}
+    <link href="{{ asset('metronic/global/plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('metronic/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block page_level_styles %}
+    <link href="{{ asset('metronic/pages/css/login.min.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block body_class %}login{% endblock %}
+
+{% block body %}
+    <!-- BEGIN LOGO -->
+    <div class="logo">
+        <a href="{{ path('homepage') }}">
+            <img src="{{ asset('logo-big.png') }}" alt="" />
+        </a>
+    </div>
+    <!-- END LOGO -->
+    <!-- BEGIN LOGIN -->
+    <div class="content">
+        {% block fos_user_content %}
+        {% endblock %}
+    </div>
+    <div class="copyright">{{ 'copyright'|trans({}, 'messages') }}</div>
+{% endblock %}
+
+{% block bottom_page_level_plugins %}
+    <script src="{{ asset('metronic/global/plugins/jquery-validation/js/jquery.validate.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('metronic/global/plugins/jquery-validation/js/additional-methods.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('metronic/global/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
+{% endblock %}

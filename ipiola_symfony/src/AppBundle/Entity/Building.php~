@@ -1,0 +1,293 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * Building
+ *
+ * @ORM\Table(name="building")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\BuildingRepository")
+ * @Vich\Uploadable
+ */
+class Building
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var object
+     *
+     * @ORM\Column(name="date", type="date")
+     */
+    private $date;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="architect", type="string", length=255)
+     */
+    private $architect;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comments", type="text", nullable=true)
+     */
+    private $comments;
+
+    /**
+     * @Vich\UploadableField(mapping="uploads", fileNameProperty="imageName")
+     *
+     * @var File
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @var string
+     */
+    private $imageName;
+
+    /**
+    * @ORM\OneToMany(targetEntity="Budget", mappedBy="building")
+    */
+    protected $budgets;
+
+    /**
+    * @ORM\ManyToOne(targetEntity="User")
+    * @ORM\JoinColumn(name="owner_id", referencedColumnName="id", onDelete="CASCADE")
+    */
+    private $owner;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->budgets = new ArrayCollection();
+        $this->date = new \DateTime();
+    }
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+     *
+     * @return Building
+     */
+    public function setImageFile(File $image = null)
+    {
+        $this->imageFile = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param string $imageName
+     *
+     * @return Building
+     */
+    public function setImageName($imageName)
+    {
+        $this->imageName = $imageName;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getImageName()
+    {
+        return $this->imageName;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Building
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Building
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set architect
+     *
+     * @param string $architect
+     *
+     * @return Building
+     */
+    public function setArchitect($architect)
+    {
+        $this->architect = $architect;
+
+        return $this;
+    }
+
+    /**
+     * Get architect
+     *
+     * @return string
+     */
+    public function getArchitect()
+    {
+        return $this->architect;
+    }
+
+    /**
+     * Set comments
+     *
+     * @param string $comments
+     *
+     * @return Building
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
+
+        return $this;
+    }
+
+    /**
+     * Get comments
+     *
+     * @return string
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * Set owner
+     *
+     * @param \AppBundle\Entity\User $owner
+     *
+     * @return Building
+     */
+    public function setOwner(\AppBundle\Entity\User $owner = null)
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * Get owner
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+
+    /**
+     * Add budget
+     *
+     * @param \AppBundle\Entity\Budget $budget
+     *
+     * @return Building
+     */
+    public function addBudget(\AppBundle\Entity\Budget $budget)
+    {
+        $this->budgets[] = $budget;
+
+        return $this;
+    }
+
+    /**
+     * Remove budget
+     *
+     * @param \AppBundle\Entity\Budget $budget
+     */
+    public function removeBudget(\AppBundle\Entity\Budget $budget)
+    {
+        $this->budgets->removeElement($budget);
+    }
+
+    /**
+     * Get budgets
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBudgets()
+    {
+        return $this->budgets;
+    }
+}

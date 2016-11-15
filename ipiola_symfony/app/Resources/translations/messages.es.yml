@@ -1,0 +1,115 @@
+
+copyright: Ipiola.cl 2016 | Todos los derechos reservados
+
+page:
+    title:
+        login: Acceder al sistema
+
+        registration:
+            register: Registrarse
+            check_email: Verifique su correo
+            confirmed: Cuenta verificada
+
+        resetting:
+            request: ¿Olvidó su contraseña?
+            check_email: Verifique su correo
+            reset: Establecer contraseña
+
+        dashboard: Escritorio
+
+        buildings:
+            list: Mis obras
+            create: Crear Nueva Obra
+            edit: Modificar Obra "%name%"
+            show: Mostrando Obra: "%name%"
+
+    description:
+        buildings:
+            list: Muestra el listado de obras
+            create: ''
+            edit: ''
+            show: ''
+
+msg:
+    enter_user_password: Escriba el usuario y la contraseña.
+    resetting:
+        request: Escriba su usuario o correo electrónico para restablecer su contraseña.
+    register: Especifique sus datos
+
+link:
+    forgot_password: ¿Olvidó su contraseña?
+    create_account: Crear una cuenta
+    back: Volver
+    page_actions: Acciones
+
+placeholder:
+    user_or_email: Usuario o correo electrónico
+
+button:
+    ok: OK
+    actions: Acciones
+
+validation:
+    required: Este campo es obligatorio.
+
+menu:
+    dashboard: Escritorio
+    logout: Cerrar sesión
+    buildings: Obras
+    all_buildings: Todas las obras
+    create_building: Crear Obra
+    update: Actualizar
+    remove: Eliminar
+    edit: Editar
+
+breadcrumb:
+    home: Inicio
+
+table:
+    title:
+        buildings: Listado de obras
+
+    action:
+        add_new: Crear nuevo
+
+    col:
+        actions: Acciones
+
+action:
+    cancel: Cancelar
+    create_building: Crear obra
+    update_building: Actualizar Obra
+    load_image: Cargar imagen
+    change: Cambiar
+    remove: Eliminar
+    edit: Editar
+    go_back: Regresar
+    insert: Insertar
+
+field:
+    building:
+        name: Nombre de la obra
+        date: Fecha
+        architect: Arquitecto
+        comments: Notas
+        image_file: Imagen
+        budgets: Presupuestos
+
+alert:
+    success:
+        building_created: La obra se ha creado satisfactoriamente.
+        building_updated: La obra se ha actualizado satisfactoriamente.
+        building_deleted: Se ha eliminado la obra especificada.
+
+    danger:
+        access_denied: Acceso denegado.
+
+label:
+    current_image: Imagen actual
+    new_image: Nueva imagen
+
+insert:
+    building: Nueva obra
+
+question:
+    remove_item_confirm: ¿Realmente desea eliminar este elemento?

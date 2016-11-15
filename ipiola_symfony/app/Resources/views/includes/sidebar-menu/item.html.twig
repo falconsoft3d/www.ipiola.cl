@@ -1,0 +1,25 @@
+        <li class="nav-item {% if item.start %}start{% endif %} {% if item.active %}active{% endif %} {% if item.open %}open{% endif %}">
+
+            {% if not item.children is empty %}
+                {% set link = 'javascript:;' %}
+            {% else %}
+                {% set link = item.link %}
+            {% endif %}
+
+            <a href="{{ link }}" class="nav-link nav-toggle">
+                <i class="{{ item.icon }}"></i>
+                <span class="title">{{ item.text }}</span>
+
+                {% if not item.children is empty %}
+                    <span class="{% if item.selected %}selected{% else %}arrow{% endif %} {% if item.open %}open{% endif %}"></span>
+                {% endif %}
+            </a>
+
+            {% if not item.children is empty %}
+                <ul class="sub-menu">
+                    {% for subitem in item.children %}
+                        {{ include('includes/sidebar-menu/item.html.twig', {'item': subitem}) }}
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </li>

@@ -1,0 +1,28 @@
+
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block page_title %}{{ 'page.title.resetting.reset'|trans({}, 'messages') }}{% endblock %}
+
+{% form_theme form _self %}
+
+{% block form_row %}
+    {% spaceless %}
+    <div class="form-group {% if not errors is empty %}has-error{% endif %}">
+        {{ form_label(form, null, {'label_attr': {'class': 'control-label visible-ie8 visible-ie9'}}) }}
+        {{ form_widget(form, {'attr': {'placeholder': label }}) }}
+        {{ form_errors(form) }}
+    </div>
+    {% endspaceless %}
+{% endblock form_row %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+{{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
+    <h3 class="font-green">{{ 'page.title.resetting.reset'|trans({}, 'messages') }}</h3>
+    {{ form_widget(form) }}
+    <div class="form-actions">
+        <button type="submit" class="btn btn-success uppercase pull-right">{{ 'resetting.reset.submit'|trans }}</button>
+    </div>
+{{ form_end(form) }}
+{% endblock fos_user_content %}

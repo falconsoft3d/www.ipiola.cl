@@ -1,0 +1,55 @@
+
+{% block form_label %}
+    {% spaceless %}
+        <label class="control-label col-md-3">
+
+            {% if label is empty %}
+                {% set label = name|humanize %}
+            {% endif %}
+
+            {{ label }}
+
+            {% if required %}
+                <span class="required"> * </span>
+            {% endif %}
+
+        </label>
+    {% endspaceless %}
+{% endblock %}
+
+{% block form_row %}
+    {% spaceless %}
+        <div class="form-group margin-top-20">
+            {{ form_label(form) }}
+            <div class="col-md-4">
+                <div class="input-icon right">
+                    <i class="fa"></i>
+                    {{ form_widget(form, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form) }}
+                </div>
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock form_row %}
+
+{% block vich_image_widget %}
+{% spaceless %}
+    <div class="fileinput fileinput-new" data-provides="fileinput">
+        <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+            {% if value %}
+                {% if not value is iterable %}
+                    <img src="{{ value }}" alt="">
+                {% endif %}
+            {% endif %}
+        </div>
+        <div>
+            <span class="btn red btn-outline btn-file">
+                <span class="fileinput-new"> {{ 'action.load_image'|trans }} </span>
+                <span class="fileinput-exists"> {{ 'action.change'|trans }} </span>
+                {{ form_widget(form.file) }}
+            </span>
+            <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> {{ 'action.remove'|trans }} </a>
+        </div>
+    </div>
+{% endspaceless %}
+{% endblock %}
